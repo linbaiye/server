@@ -24,7 +24,7 @@ struct HonorStanding
 
     // create the standing order
     bool operator < (const HonorStanding& hs)
-    {
+    const {
         return cp > hs.cp;
     }
 };

@@ -59,7 +59,7 @@ MMapManager::~MMapManager()
     // if we had, tiles in MMapData->mmapLoadedTiles, their actual data is lost!
 }
 
-void MMapManager::CleanUpNavQuery(uint32 tid)
+void MMapManager::CleanUpNavQuery(uint64 tid)
 {
     loadedMMaps_lock.acquire_read();
     //DEBUG_LOG("Cleaning up any dtNavMeshQuery related to tid %u in loadedMMaps", tid);
@@ -78,7 +78,7 @@ void MMapManager::CleanUpNavQuery(uint32 tid)
 
 void MMapManager::CleanUpCurrentThreadNavQuery()
 {
-    CleanUpNavQuery(ACE_Based::Thread::currentId());
+    CleanUpNavQuery((uint64)ACE_Based::Thread::currentId());
 }
 
 void MMapManager::RemoveThreadNavMeshQueries(uint32 tid, MMapData *mmap)
@@ -390,7 +390,7 @@ dtNavMeshQuery const* MMapManager::GetNavMeshQuery(uint32 mapId)
     // since the pool of IDs is so large, we allocate a significant amount of memory which may or
     // may not ever be used again. We must be sure to clean up the nav query once a thread exits.
     // Alive thread ID uniqueness is guaranteed for both Unix and Windows.
-    uint32 tid = ACE_Based::Thread::currentId();
+    uint64 tid = (uint64)ACE_Based::Thread::currentId();
 
     mmap->navMeshQueries_lock.acquire_read();
     NavMeshQuerySet::iterator it = mmap->navMeshQueries.find(tid);
@@ -517,7 +517,7 @@ dtNavMeshQuery const* MMapManager::GetModelNavMeshQuery(uint32 displayId)
     MMapData* mmap = loadedModels[displayId];
     loadedModels_lock.release();
 
-    uint32 tid = ACE_Based::Thread::currentId();
+    uint64 tid = (uint64)ACE_Based::Thread::currentId();
     dtNavMeshQuery* navMeshQuery = NULL;
 
     mmap->navMeshQueries_lock.acquire_read();

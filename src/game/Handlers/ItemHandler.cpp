@@ -1259,7 +1259,6 @@ void WorldSession::HandleCancelTempEnchantmentOpcode(WorldPacket& recv_data)
 
     if (!item->GetEnchantmentId(TEMP_ENCHANTMENT_SLOT))
         return;
-
     GetPlayer()->ApplyEnchantment(item, TEMP_ENCHANTMENT_SLOT, false);
     item->ClearEnchantment(TEMP_ENCHANTMENT_SLOT);
 }

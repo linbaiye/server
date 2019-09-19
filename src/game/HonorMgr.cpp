@@ -522,12 +522,12 @@ float HonorMaintenancer::MaximumRpAtLevel(uint8 level)
 
 void HonorMaintenancer::CheckMaintenanceDay()
 {
-    if (sWorld.GetGameDay() >= m_nextMaintenanceDay && !m_markerToStart)
-    {
-        // Restart 15 minutes after honor weekend by server time
-        sWorld.ShutdownServ(900, SHUTDOWN_MASK_RESTART, SHUTDOWN_EXIT_CODE);
-        ToggleMaintenanceMarker();
-    }
+    // if (sWorld.GetGameDay() >= m_nextMaintenanceDay && !m_markerToStart)
+    // {
+    //     // Restart 15 minutes after honor weekend by server time
+    //     sWorld.ShutdownServ(900, SHUTDOWN_MASK_RESTART, SHUTDOWN_EXIT_CODE);
+    //     ToggleMaintenanceMarker();
+    // }
 }
 
 void HonorMaintenancer::ToggleMaintenanceMarker()

@@ -78,7 +78,7 @@ namespace MMAP
             MMapManager() : loadedTiles(0) {}
             ~MMapManager();
 
-            void CleanUpNavQuery(uint32 tid);       // Cleans up the dtNavMeshQuery created by the given thread (if any)
+            void CleanUpNavQuery(uint64 tid);       // Cleans up the dtNavMeshQuery created by the given thread (if any)
             void CleanUpCurrentThreadNavQuery();    // Cleans up the dtNavMeshQuery created by the current thread (if any)
 
             bool loadMap(uint32 mapId, int32 x, int32 y);
